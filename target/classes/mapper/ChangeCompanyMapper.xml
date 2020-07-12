@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.ChangeCompanyMapper">
+	<sql id="Base_Column_List">
+		ID, CYZG_CARD, NAME, OLD_COMPANY, NEW_COMPANY, STATUS, ADDTIME
+	</sql>
+	
+	<insert id="insert" parameterType="pd">
+		insert into tb_change_company
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cyzg_card != null">
+				CYZG_CARD,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="old_company != null">
+				OLD_COMPANY,
+			</if>
+			<if test="new_company != null">
+				NEW_COMPANY,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzg_card != null">
+				#{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="old_company != null">
+				#{old_company,jdbcType=VARCHAR},
+			</if>
+			<if test="new_company != null">
+				#{new_company,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	
+	
+	<select id="list" parameterType="pd" resultType="ChangeCompany">
+		select
+		<include refid="Base_Column_List" />
+		from tb_change_company
+		<where>
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND NEW_COMPANY = #{company}
+			</if>
+		</where>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		select
+		<include refid="Base_Column_List" />
+		from tb_change_company
+		<where>
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND NEW_COMPANY = #{company}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="ChangeCompany">
+		select
+			<include refid="Base_Column_List"/>
+		from tb_change_company
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="update" parameterType="pd">
+		update tb_change_company
+		<set>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="old_company != null">
+				OLD_COMPANY = #{old_company,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where CYZG_CARD = #{cyzgCard,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete" parameterType="pd">
+		delete from
+		tb_change_company
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	  
+	  <!-- 修改状态 -->
+	<update id="updateStatus" parameterType="pd" flushCache="false">
+		update tb_change_company set STATUS = #{status,jdbcType=VARCHAR}
+		where ID in
+  			 <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+  <!-- <update id="updateStatus" parameterType="pd">
+		update tb_change_company
+		<set>			
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update> -->
+</mapper>

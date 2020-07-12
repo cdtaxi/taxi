@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.CaseMapper">
+
+
+	<!-- 案件查询 -->
+	<select id="caseList" parameterType="pd" resultType="pd">
+		SELECT ID,
+		AY FROM zf_case
+	</select>
+	<select id="caseListPage" parameterType="hashMap" resultType="Anjian">
+		select * from zf_case
+		<where>
+			<if test="anhao != null and anhao != ''">
+				AND anhao like '%'+ #{anhao}+'%'
+			</if>
+			<if test="grxm != null and grxm != ''">
+				AND grxm like '%'+ #{grxm}+'%'
+			</if>
+			<if test="ay != null and ay != ''">
+				AND ay like '%'+ #{aya}+'%'
+			</if>
+		</where>
+
+	</select>
+
+	<!-- 基本信息 -->
+	<select id="listJbxx" parameterType="pd" resultType="pd">
+		SELECT
+		ID,SDDW ,AJMC ,AJBGQX ,AJJS ,AJQZH,JFYH,FYDW ,SSDW ,ZFZT ,TZLXDZ
+		,TZLXR,TZLXYB ,TZLXDH ,TLDD ,GZYQ,ZJCLJD
+		FROM ZF_JBXX
+	</select>
+	<!-- 执法人员 -->
+	<select id="zfryList" parameterType="hashMap" resultType="Zfry">
+		SELECT
+		ID,zfrxm ,zfzh ,zw FROM ZF_zfry
+	</select>
+	<!-- 案由管理 -->
+	<select id="anyouList" parameterType="hashMap" resultType="Anyou">
+		SELECT ID,anyou ,aybh FROM ZF_ay
+	</select>
+</mapper>

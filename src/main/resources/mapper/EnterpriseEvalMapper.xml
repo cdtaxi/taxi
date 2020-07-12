@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.taxi.mapper.EnterpriseEvalMapper">
+	<sql id="sql_temp">
+		ID, PARENT_ID, DATE, PROJECT, REDUCTION, PLUS, NOTE, ADDTIME
+	</sql>
+	
+	<select id="queryList" resultType="EnterpriseEval" parameterType="pd">
+		SELECT
+		a.ID, a.PARENT_ID, a.DATE, a.PROJECT, a.REDUCTION, a.PLUS, a.NOTE, a.ADDTIME,
+		b.UNITNAME
+		FROM tb_enterprise_eval a,tb_enterprise_info b where 1=1 and a.PARENT_ID=b.id
+			<if test="parent_id != null and parent_id != ''">
+				AND a.PARENT_ID = #{parent_id} 
+			</if>
+	</select>
+	
+	<select id="excelList" resultType="pd" parameterType="pd">
+		SELECT
+		a.ID, a.PARENT_ID, a.DATE, a.PROJECT, a.REDUCTION, a.PLUS, a.NOTE, a.ADDTIME,
+		b.UNITNAME
+		FROM tb_enterprise_eval a,tb_enterprise_info b where 1=1 and a.PARENT_ID=b.id
+			<if test="parent_id != null and parent_id != ''">
+				AND a.PARENT_ID = #{parent_id} 
+			</if>
+	</select>
+
+	<select id="queryOne" resultType="EnterpriseEval" parameterType="string">
+		SELECT <include refid="sql_temp" /> FROM tb_enterprise_eval WHERE ID = #{id}
+	</select>
+
+	<insert id="save" parameterType="pd">
+		INSERT INTO tb_enterprise_eval (ID, PARENT_ID, DATE, PROJECT, REDUCTION, PLUS, NOTE, ADDTIME)
+		VALUES(#{id},#{parent_id}, #{date}, #{project}, #{reduction}, #{plus},
+		#{note},  CONVERT(varchar(20), getdate(), 120 ) )
+	</insert>
+
+	<update id="edit" parameterType="pd">
+		UPDATE tb_enterprise_eval SET
+		parent_id=#{parent_id}, date=#{date}, project=#{project},reduction=#{reduction}, 
+		plus=#{plus},note=#{note}
+        WHERE ID= #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM tb_enterprise_eval WHERE ID = #{id}
+	</delete>
+</mapper>

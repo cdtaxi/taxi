@@ -1,0 +1,291 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>cn.slkj</groupId>
+		<artifactId>taxi</artifactId>
+		<packaging>war</packaging>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>taxi Maven Webapp</name>
+		<url>http://maven.apache.org</url>
+		<properties>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<springVersion>4.3.0.RELEASE</springVersion>
+				<jacksonVersion>2.9.3</jacksonVersion>
+				<mybatisVersion>3.4.4</mybatisVersion>
+				<mybatisSpringVersion>1.3.0</mybatisSpringVersion>
+				<c3p0Version>0.9.5.2</c3p0Version>
+				<mysqlVersion>5.1.38</mysqlVersion>
+				<slf4jVersion>1.7.21</slf4jVersion>
+				<log4jVersion>1.2.17</log4jVersion>
+				<jstlVersion>1.2</jstlVersion>
+				<servletApiVersion>3.1.0</servletApiVersion>
+				<junitVersion>4.12</junitVersion>
+				<druid.version>1.0.23</druid.version>
+		</properties>
+		<dependencies>
+				<!--junit 测试开始 -->
+				<dependency>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+						<version>${junitVersion}</version>
+						<scope>test</scope>
+				</dependency>
+				<!--junit 测试结束 -->
+
+				<!--Slf4j + Log4j日志依赖 开始 -->
+				<dependency>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+						<version>${slf4jVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+						<version>${slf4jVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+						<version>${log4jVersion}</version>
+				</dependency>
+				<!--Slf4j + Log4j日志依赖 结束 -->
+
+				<!--JavaEE web容器提供 开始 -->
+				<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>javax.servlet-api</artifactId>
+						<version>${servletApiVersion}</version>
+						<scope>provided</scope>
+				</dependency>
+				<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jsp-api</artifactId>
+						<version>2.0</version>
+						<scope>provided</scope>
+				</dependency>
+				<!--JavaEE web容器提供 结束 -->
+
+				<!--Jsp 常用标签库依赖 开始 -->
+				<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>${jstlVersion}</version>
+						<scope>runtime</scope>
+				</dependency>
+				<!--javax.servlet-api -->
+				<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>javax.servlet-api</artifactId>
+						<version>3.1.0</version>
+				</dependency>
+				<!--Jsp 常用标签库依赖 结束 -->
+
+				<!-- SpringMVC模块依赖 开始 -->
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-webmvc</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+						<version>${jacksonVersion}</version>
+				</dependency>
+				<!-- SpringMVC模块依赖 结束 -->
+
+				<!-- Mybatis模块依赖 开始 -->
+				<dependency>
+						<groupId>org.mybatis</groupId>
+						<artifactId>mybatis</artifactId>
+						<version>${mybatisVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.mybatis</groupId>
+						<artifactId>mybatis-spring</artifactId>
+						<version>${mybatisSpringVersion}</version>
+				</dependency>
+				<!-- Mybatis模块依赖 结束 -->
+
+				<!--C3p0 数据库连接池依赖 开始 -->
+				<dependency>
+						<groupId>com.mchange</groupId>
+						<artifactId>c3p0</artifactId>
+						<version>${c3p0Version}</version>
+				</dependency>
+				<!--C3p0 数据库连接池依赖 结束 -->
+
+				<!--Jdbc 驱动依赖 开始 -->
+				<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysqlVersion}</version>
+				</dependency>
+				<!--Jdbc 驱动依赖 结束 -->
+				<!-- 连接池 阿里巴巴数据源 -->
+				<dependency>
+						<groupId>com.alibaba</groupId>
+						<artifactId>druid</artifactId>
+						<version>${druid.version}</version>
+				</dependency>
+				<dependency>
+						<groupId>net.sourceforge.jtds</groupId>
+						<artifactId>jtds</artifactId>
+						<version>1.2.4</version>
+				</dependency>
+				<!--Spring常用模块依赖 开始 -->
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-aop</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-aspects</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context-support</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-jdbc</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-orm</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-tx</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-test</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-web</artifactId>
+						<version>${springVersion}</version>
+				</dependency>
+				<!--Spring常用模块依赖结束 -->
+
+				<dependency>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-mapper-asl</artifactId>
+						<version>1.9.4</version>
+				</dependency>
+
+				<dependency>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+						<version>2.6.7</version>
+				</dependency>
+				<dependency>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+						<version>2.6.7</version>
+				</dependency>
+
+				<dependency>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+						<version>2.6</version>
+				</dependency>
+				<dependency>
+						<groupId>commons-fileupload</groupId>
+						<artifactId>commons-fileupload</artifactId>
+						<version>1.2.2</version>
+				</dependency>
+				<dependency>
+						<groupId>commons-io</groupId>
+						<artifactId>commons-io</artifactId>
+						<version>2.4</version>
+				</dependency>
+				<dependency>
+						<groupId>net.sf.json-lib</groupId>
+						<artifactId>json-lib</artifactId>
+						<version>2.4</version>
+						<classifier>jdk15</classifier>
+				</dependency>
+
+				<dependency>
+						<groupId>com.github.miemiedev</groupId>
+						<artifactId>mybatis-paginator</artifactId>
+						<version>1.2.15</version>
+				</dependency>
+				<dependency>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+						<version>1.0.11</version>
+				</dependency>
+				<dependency>
+						<groupId>org.apache.poi</groupId>
+						<artifactId>poi</artifactId>
+						<version>3.11</version>
+				</dependency>
+				<!-- jasperreports Start -->
+				<!-- 该包的作用完成ireport中Preview按扭功能。通过该包可以通过java来ireport生成摸班（.jrxml或.jasper)填充数据源并导出pdf,excel,html等格式文件 -->
+				<dependency>
+						<groupId>net.sf.jasperreports</groupId>
+						<artifactId>jasperreports</artifactId>
+						<version>6.7.0</version>
+				</dependency>
+				<dependency>
+						<!-- 生成pdf所依赖的包 -->
+						<groupId>com.itextpdf</groupId>
+						<artifactId>itextpdf</artifactId>
+						<version>5.5.11</version>
+				</dependency>
+				<dependency>
+						<groupId>com.itextpdf</groupId>
+						<artifactId>itext-pdfa</artifactId>
+						<version>5.5.11</version>
+				</dependency>
+				<dependency>
+						<groupId>com.itextpdf</groupId>
+						<artifactId>itext-asian</artifactId>
+						<version>5.2.0</version>
+				</dependency>
+				<!--将.jrxml编译成.jasper.如果你不使用java编译，而使用ireport工具编译则无须导入该 包 -->
+				<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-all</artifactId>
+						<version>2.4.13</version>
+				</dependency>
+				<!-- jasperreports End -->
+		</dependencies>
+		<build>
+				<finalName>taxi</finalName>
+				<plugins>
+						<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-compiler-plugin</artifactId>
+								<configuration>
+										<source>1.7</source>
+										<target>1.7</target>
+								</configuration>
+						</plugin>
+				</plugins>
+		</build>
+</project>

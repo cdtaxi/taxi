@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.MenuMapper">
+	<sql id="Base_Column_List">
+		ID,PARENT_ID,NAME,URL,ICON,PRIORITY,SORT,DESCRIPTION
+	</sql>
+	<select id="listAllParentMenu" resultType="Menu" parameterType="hashmap">
+<!-- 		SELECT * FROM SYS_MENU WHERE parent_id =#{pid} ORDER BY SORT -->
+		SELECT <include refid="Base_Column_List"></include>  FROM 	SYS_MENU SM, SYS_ROLE_RES SRR
+		WHERE SM.ID= SRR.MODULE_ID 	AND PARENT_ID = #{pid}  AND SRR.ROLE_ID= #{roleid}
+		ORDER BY SORT
+	</select>
+	<select id="getSubMenu" resultType="Menu" parameterType="hashmap">
+<!-- 		SELECT * FROM SYS_MENU WHERE PRIORITY > 1 ORDER BY  ID -->
+		
+		SELECT <include refid="Base_Column_List"></include>  FROM 	SYS_MENU SM, SYS_ROLE_RES SRR
+		WHERE SM.ID= SRR.MODULE_ID  and PRIORITY > 1  AND SRR.ROLE_ID= #{roleid}
+		ORDER BY SORT
+	</select>
+	
+	<select id="getModuleByRoleId" parameterType="pd" resultType="Menu">
+		SELECT <include refid="Base_Column_List"></include>  FROM 	SYS_MENU SM, SYS_ROLE_RES SRR
+		WHERE SM.ID= SRR.MODULE_ID    AND SRR.ROLE_ID= #{roleid} AND ID != '1'
+		ORDER BY SORT
+	</select>
+	
+	<select id="queryOne" resultType="Menu" parameterType="String">
+		SELECT <include refid="Base_Column_List"/> FROM SYS_MENU where ID = #{id}		
+	</select>
+	<select id="listAllMenu" resultType="Menu" parameterType="pd">
+		SELECT * FROM SYS_MENU 
+		<where>
+			<if test="pid != null and pid != ''">
+				AND parent_id = #{pid}
+			</if>
+			<if test="priority != null  and priority != ''">
+				AND PRIORITY &lt; #{priority}
+			</if>
+		</where>
+		ORDER BY SORT
+	</select>
+	<insert id="save" parameterType="pd">
+		INSERT INTO SYS_MENU(PARENT_ID,NAME,URL,ICON,PRIORITY,SORT,DESCRIPTION)
+		VAlues(#{parent_id},#{name},#{url},#{icon},#{priority},#{sort},#{description} )
+	</insert>
+	<update id="edit" parameterType="pd">
+		UPDATE SYS_MENU SET NAME=#{name},PRIORITY=#{priority},URL=#{url}, PARENT_ID=#{parent_id},ICON=#{icon}, DESCRIPTION=#{description},SORT=#{sort}
+		WHERE ID =#{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		DELETE FROM SYS_MENU WHERE ID=#{id}
+	</delete>
+</mapper>

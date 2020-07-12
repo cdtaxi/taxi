@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.taxi.mapper.ExamineMapper">
+	<sql id="Base_Column_List">
+		id, empId, ordinalId, scoring, examineTime, remark
+	</sql>
+	<select id="getExamineListByIDCard" parameterType="hashMap" resultType="Examine">
+		select te.id,te.empId,te.ordinalId+tex.standard as
+		ordinal,te.scoring,te.examineTime,remark from tb_examine
+		te,tb_examineStandard tex
+		where te.ordinalId = tex.ordinal
+		<if test="idcard != null and idcard != ''"> <!-- 公司检索条件 -->
+				and te.empId = #{idcard}
+			</if>
+	</select>
+	<select id="getAllList" parameterType="pd" resultType="Examine">
+		select te.id,te.empId,te.ordinalId+tex.standard as
+		ordinal,te.scoring,te.examineTime,te.remark,em.name as name,
+		em.cyzg_card as cyzgCard from tb_examine
+		te,tb_examineStandard tex,tb_employee em
+		where te.ordinalId = tex.ordinal and te.empId=em.idcard
+		<if test="cyzgCard != null and cyzgCard != ''"> <!-- 公司检索条件 -->
+				and em.cyzg_card like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				and em.name LIKE '%'+ #{name}+'%'
+			</if>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		select te.id,te.empId,te.ordinalId+tex.standard as
+		ordinal,te.scoring,te.examineTime,te.remark,em.name as name,
+		em.cyzg_card as cyzgCard from tb_examine
+		te,tb_examineStandard tex,tb_employee em
+		where te.ordinalId = tex.ordinal and te.empId=em.idcard
+		<if test="cyzgCard != null and cyzgCard != ''"> <!-- 公司检索条件 -->
+				and em.cyzg_card like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				and em.name LIKE '%'+ #{name}+'%'
+			</if>
+	</select>
+	<select id="getOne" parameterType="String" resultType="Examine">
+		select <include refid="Base_Column_List"></include> from tb_examine		
+		where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="pd">
+		INSERT INTO tb_examine (empId, ordinalId, scoring, examineTime, remark)
+		VALUES(#{empId},#{ordinalId}, #{scoring}, #{examineTime}, #{remark} )
+	</insert>
+
+	<update id="edit" parameterType="pd">
+		UPDATE tb_examine SET
+		ordinalId=#{ordinalId}, scoring=#{scoring}, examineTime=#{examineTime},remark=#{remark}
+        WHERE ID= #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM tb_examine WHERE ID = #{id}
+	</delete>
+</mapper>

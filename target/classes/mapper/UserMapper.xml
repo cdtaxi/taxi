@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.UserMapper">
+
+	<select id="getUserByNameAndPwd" parameterType="pd" resultType="User">
+		SELECT * FROM SYS_USER
+		<where>
+			<if test="username != null and password != null">
+				AND USERNAME = #{username} AND PASSWORD = #{password}
+			</if>
+		</where>
+	</select>
+	<select id="getAllUsers" parameterType="pd" resultType="User">
+		SELECT * FROM SYS_USER
+		<where>
+			<if test="username != null and password != null">
+				AND USERNAME = #{username} AND PASSWORD = #{password}
+			</if>
+			<if test="name != null">
+				AND realname  like '%'+ #{name}+'%'
+			</if>
+		</where>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		SELECT * FROM SYS_USER
+		<where>
+			<if test="username != null and password != null">
+				AND USERNAME = #{username} AND PASSWORD = #{password}
+			</if>
+			<if test="name != null">
+				AND realname  like '%'+ #{name}+'%'
+			</if>
+		</where>
+	</select>
+	<insert id="saveUser" parameterType="pd">
+		INSERT INTO SYS_USER( username ,password,status ,realname,sex ,email ,phone
+		,create_time ,lastTime ,remark ,address ,departName )
+		VALUES(#{username },#{password},#{status },#{realname},#{sex},#{email
+		},#{phone },#{create_time },#{lastTime },#{remark
+		},#{address},#{departName} )
+	</insert>
+	<delete id="deleteUser" parameterType="string">
+		DELETE FROM SYS_USER WHERE ID=#{id}
+	</delete>
+
+	<update id="editUser" parameterType="pd">
+		UPDATE SYS_USER
+		<set>
+			<if test="username != null"> username = #{username},</if>
+			<if test="realname != null"> realname = #{realname},</if>
+			<if test="status != null"> STATUS = #{status},</if>
+			<if test="email != null"> email = #{email},</if>
+			<if test="sex != null"> sex = #{sex},</if>
+			<if test="phone != null"> phone = #{phone},</if>
+			<if test="departName != null"> departName = #{departName},</if>
+			<if test="roleId != null"> roleId = #{roleId},</if>
+			<if test="remark != null"> remark = #{remark},</if>
+		</set>
+	 	WHERE ID = #{id}
+	</update>
+</mapper>

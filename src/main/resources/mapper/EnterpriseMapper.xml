@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.taxi.mapper.EnterpriseMapper">
+	<sql id="sql_temp">
+		id, unitname, phone, unitaddr, businessscope, businessno,
+		 enterprisecode, regcapital, economytype, legalrepresentative,
+		  vehiclesnum, employeescount, manageersonnel, carnum, addtime
+	</sql>
+	<select id="queryComList" resultType="Enterprise" parameterType="pd">
+		SELECT <include refid="sql_temp" /> FROM tb_enterprise_info
+		<where>
+			<if test="unitname != null and unitname != ''">
+				AND unitname LIKE '%'+ #{unitname} +'%'
+			</if>
+		</where>
+	</select>
+	<select id="queryList" resultType="Enterprise" parameterType="pd">
+		SELECT
+		<include refid="sql_temp" />
+		FROM tb_enterprise_info
+		<where>
+			<if test="unitname != null and unitname != ''">
+				AND unitname LIKE '%'+ #{unitname} +'%'
+			</if>
+			<if test="businessno != null and businessno != ''">
+				AND businessno LIKE '%'+ #{businessno} +'%'
+			</if>
+			<if test="legalrepresentative != null and legalrepresentative != ''">
+				AND legalrepresentative LIKE '%'+ #{legalrepresentative} +'%'
+			</if>
+		</where>
+	</select>
+	<select id="excelList" resultType="pd" parameterType="pd">
+		SELECT
+		<include refid="sql_temp" />
+		FROM tb_enterprise_info
+		<where>
+			<if test="unitname != null and unitname != ''">
+				AND unitname LIKE '%'+ #{unitname} +'%'
+			</if>
+			<if test="businessno != null and businessno != ''">
+				AND businessno LIKE '%'+ #{businessno} +'%'
+			</if>
+			<if test="legalrepresentative != null and legalrepresentative != ''">
+				AND legalrepresentative LIKE '%'+ #{legalrepresentative} +'%'
+			</if>
+		</where>
+	</select>
+
+	<select id="queryOne" resultType="Enterprise" parameterType="string">
+		SELECT <include refid="sql_temp" /> FROM tb_enterprise_info WHERE ID = #{id}
+	</select>
+
+	<insert id="save" parameterType="pd">
+		INSERT INTO tb_enterprise_info (id,unitname, phone, unitaddr, 
+		businessscope, businessno,enterprisecode, regcapital, economytype,
+		 legalrepresentative,vehiclesnum, employeescount, manageersonnel, carnum, addtime)
+		VALUES(#{id},#{unitname}, #{phone}, #{unitaddr}, #{businessscope}, #{ businessno},
+		#{enterprisecode}, #{ regcapital}, #{ economytype}, #{legalrepresentative},
+		#{vehiclesnum}, #{employeescount}, #{manageersonnel}, #{carnum}, CONVERT(varchar(20), getdate(), 120 ) )
+	</insert>
+
+	<update id="edit" parameterType="pd">
+		UPDATE tb_enterprise_info SET
+		unitname=#{unitname}, phone=#{phone}, unitaddr=#{unitaddr},businessscope=#{businessscope}, 
+		businessno=#{businessno},enterprisecode=#{enterprisecode}, regcapital=#{regcapital}, 
+		economytype=#{economytype},legalrepresentative=#{legalrepresentative},vehiclesnum=#{vehiclesnum}, 
+		employeescount=#{employeescount}, manageersonnel=#{manageersonnel}, carnum=#{carnum}
+        WHERE ID= #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM tb_enterprise_info WHERE ID = #{id}
+	</delete>
+</mapper>

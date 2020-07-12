@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeCancelMapper">
+	<sql id="Base_Column_List">
+		ID, CYZG_CARD, NAME, SEX, BORNDATE, IDCARD, ADDRESS, PHONE, DRIVE_CARD, 
+		DRIVE_START_DATE, COMPANY, CARID, PASSTIME, STATUS, ADDTIME, FLAG
+	</sql>
+	<select id="list" parameterType="pd" resultType="EmployeeCancel">
+		select
+			a.ID, a.CYZG_CARD, a.NAME, a.SEX, a.BORNDATE, a.IDCARD, a.ADDRESS, a.PHONE,
+			a.DRIVE_CARD, a.DRIVE_START_DATE,
+			a.COMPANY, a.CARID, a.PASSTIME, a.STATUS, a.ADDTIME, b.PERSONAL_ID as personalId, b.CARTYPE
+		from tb_employee_cancel a, tb_employee b
+		where
+		1 = 1 and a.IDCARD = b.IDCARD
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND a.STATUS = #{status}
+			</if>
+			<if test="flag == 0">
+			and a.FLAG = 0
+			</if>
+			<if test="flag == 1">
+			and a.FLAG = 1
+			</if>			
+			<if test="company!=null and company!=''">
+			AND a.COMPANY = #{company}
+			</if>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		select
+			a.ID, a.CYZG_CARD, a.NAME, a.SEX, a.BORNDATE, a.IDCARD, a.ADDRESS, a.PHONE,
+			a.DRIVE_CARD, a.DRIVE_START_DATE,
+			a.COMPANY, a.CARID, a.PASSTIME, a.STATUS, a.ADDTIME, a.FLAG, b.PERSONAL_ID as personalId, b.CARTYPE
+		from tb_employee_cancel a, tb_employee b
+		where
+		1 = 1 and a.IDCARD = b.IDCARD
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND a.STATUS = #{status}
+			</if>
+			<if test="flag == 0">
+			and a.FLAG = 0
+			</if>
+			<if test="flag == 1">
+			and a.FLAG = 1
+			</if>			
+			<if test="company!=null and company!=''">
+			AND a.COMPANY = #{company}
+			</if>
+	</select>
+
+	<select id="selectOne" parameterType="pd"
+		resultType="EmployeeCancel">
+		select a.ID, a.CYZG_CARD, a.NAME, a.SEX, a.BORNDATE, a.IDCARD, a.ADDRESS, a.PHONE,
+			a.DRIVE_CARD, a.DRIVE_START_DATE,
+			a.COMPANY, a.CARID, a.PASSTIME, a.STATUS, a.ADDTIME, b.PERSONAL_ID as personalId, b.CARTYPE,
+		b.REGISTER_DATE as registerDate from tb_employee_cancel a, tb_employee b
+		<!-- <include refid="Base_Column_List" /> -->
+		where 1 = 1 and a.IDCARD = b.IDCARD 
+			<if test="id != nll and id !=''">
+				AND a.ID = #{id,jdbcType=VARCHAR} 
+			</if>
+			<if test="idcard != nll and idcard !=''">
+				AND a.IDCARD = #{idcard,jdbcType=VARCHAR}
+			</if>
+	</select>
+
+	<!--  and b.PERSONAL_ID is not null and b.PERSONAL_ID != '' -->
+
+	<delete id="delete" parameterType="pd">
+		delete from
+		tb_employee_cancel
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+<!-- 普通注销 -->
+	<insert id="insert" parameterType="pd">
+		insert into tb_employee_cancel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cyzg_card != null">
+				CYZG_CARD,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="borndate != null">
+				BORNDATE,
+			</if>
+			<if test="idcard != null">
+				IDCARD,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="phone != null">
+				PHONE,
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD,
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE,
+			</if>
+			<if test="company != null">
+				COMPANY,
+			</if>
+			<if test="carid != null">
+				CARID,
+			</if>
+			<if test="passtime != null">
+				PASSTIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="flag != null">
+				FLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzg_card != null">
+				#{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				#{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				#{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				#{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				#{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				#{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				#{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="flag != null">
+				#{flag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>	
+	<!-- 普通注销 -->
+	<update id="update" parameterType="pd">
+		update tb_employee_cancel
+		<set>
+			<if test="cyzg_card != null">
+				CYZG_CARD = #{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				BORNDATE = #{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				IDCARD = #{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD = #{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE = #{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				CARID = #{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				PASSTIME = #{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="flag != null">
+				FLAG = #{flag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 报废注销 -->
+	<insert id="save" parameterType="EmployeeCancel">
+		insert into tb_employee_cancel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cyzg_card != null">
+				CYZG_CARD,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="borndate != null">
+				BORNDATE,
+			</if>
+			<if test="idcard != null">
+				IDCARD,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="phone != null">
+				PHONE,
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD,
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE,
+			</if>
+			<if test="company != null">
+				COMPANY,
+			</if>
+			<if test="carid != null">
+				CARID,
+			</if>
+			<if test="passtime != null">
+				PASSTIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="flag != null">
+				FLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzg_card != null">
+				#{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				#{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				#{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				#{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				#{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				#{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				#{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="flag != null">
+				#{flag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 报废注销 -->
+	<update id="edit" parameterType="EmployeeCancel">
+		update tb_employee_cancel
+		<set>
+			<if test="cyzg_card != null">
+				CYZG_CARD = #{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				BORNDATE = #{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				IDCARD = #{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD = #{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE = #{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				CARID = #{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				PASSTIME = #{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="flag != null">
+				FLAG = #{flag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+		
+	<update id="updateStatus" parameterType="pd">
+		update tb_employee_cancel set STATUS = #{status,jdbcType=VARCHAR},
+		PASSTIME = #{passtime,jdbcType=VARCHAR}
+		where ID in
+  			 <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+</mapper>

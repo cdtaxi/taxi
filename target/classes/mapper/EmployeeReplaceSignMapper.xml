@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeReplaceSignMapper">
+	
+ <sql id="Base_Column_List">
+    ID, NAME, SEX, BORNDATE, IDCARD, ADDRESS, PHONE, DRIVE_TYPE, DRIVE_START_DATE, COMPANY, 
+    CARID, OLD_SIGN_ID, FIRST_SIGN_DATE, PASSTIME, STATUS, ADDTIME
+  </sql>
+  
+	<select id="list" parameterType="pd" resultType="EmployeeReplaceSign">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee_replace_sign
+		<where>
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND OLD_SIGN_ID
+				 like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND COMPANY = #{company}
+			</if>
+		</where>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee_replace_sign
+		<where>
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND OLD_SIGN_ID
+				 like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND COMPANY = #{company}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectOne" parameterType="String" resultType="EmployeeReplaceSign">
+		select
+			<include refid="Base_Column_List" />
+		from tb_employee_replace_sign
+		where ID = #{id,jdbcType=VARCHAR}
+		order by ADDTIME desc
+	</select> 
+  
+  <delete id="delete" parameterType="pd">
+    delete from tb_employee_replace_sign
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="pd">
+    insert into tb_employee_replace_sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="borndate != null">
+        BORNDATE,
+      </if>
+      <if test="idcard != null">
+        IDCARD,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="drive_type != null">
+        DRIVE_TYPE,
+      </if>
+      <if test="drive_start_date != null">
+        DRIVE_START_DATE,
+      </if>
+      <if test="company != null">
+        COMPANY,
+      </if>
+      <if test="carid != null">
+        CARID,
+      </if>
+      <if test="old_sign_id != null">
+        OLD_SIGN_ID,
+      </if>
+      <if test="first_sign_date != null">
+        FIRST_SIGN_DATE,
+      </if>
+      <if test="passtime != null">
+        PASSTIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="addtime != null">
+        ADDTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="borndate != null">
+        #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="drive_type != null">
+        #{drive_type,jdbcType=VARCHAR},
+      </if>
+      <if test="drive_start_date != null">
+        #{drive_start_date,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="old_sign_id != null">
+        #{old_sign_id,jdbcType=VARCHAR},
+      </if>
+      <if test="first_sign_date != null">
+        #{first_sign_date,jdbcType=VARCHAR},
+      </if>
+      <if test="passtime != null">
+        #{passtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="pd">
+    update tb_employee_replace_sign
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="borndate != null">
+        BORNDATE = #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="drive_type != null">
+        DRIVE_TYPE = #{drive_type,jdbcType=VARCHAR},
+      </if>
+      <if test="drive_start_date != null">
+        DRIVE_START_DATE = #{drive_start_date,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        COMPANY = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        CARID = #{carid,jdbcType=VARCHAR},
+      </if>
+      <if test="old_sign_id != null">
+        OLD_SIGN_ID = #{old_sign_id,jdbcType=VARCHAR},
+      </if>
+      <if test="first_sign_date != null">
+        FIRST_SIGN_DATE = #{first_sign_date,jdbcType=VARCHAR},
+      </if>
+      <if test="passtime != null">
+        PASSTIME = #{passtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <update id="updateStatus" parameterType="pd">
+		update tb_employee_replace_sign set STATUS = #{status,jdbcType=VARCHAR},
+		 PASSTIME = #{passtime,jdbcType=VARCHAR}
+		where ID in
+  			 <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+</mapper>

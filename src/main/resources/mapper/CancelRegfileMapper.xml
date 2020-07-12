@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.CancelRegfileMapper">
+	<sql id="Base_Column_List">
+		ID, PID, PATH, CREATETIME
+	</sql>
+	
+	<insert id="savePic" parameterType="pd">
+		insert into tb_cancel_regfile(
+			ID,	
+			PID,	
+			PATH,	
+			CREATETIME
+		) values (
+			#{id},	
+			#{pid},	
+			#{path},	
+			#{createtime}
+		)
+	</insert>
+	
+	
+	<delete id="deletePic" parameterType="String">
+		delete from tb_cancel_regfile
+		where 
+			ID = #{id}
+	</delete>
+	
+	
+	<select id="listFilebyPid" parameterType="String" resultType="CancelRegfile">
+		select
+			<include refid="Base_Column_List" />
+		from 
+			tb_cancel_regfile
+		where
+			PID = #{pid}
+	</select>
+</mapper>

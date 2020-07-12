@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeRegisterMapper">
+	
+
+	<sql id="Base_Column_List">
+		ID, CYZG_CARD, NAME, SEX, BORNDATE, IDCARD, ADDRESS, PHONE, DRIVE_CARD,
+		DRIVE_START_DATE,
+		CARID, CARTYPE, COMPANY, ENGAGE_CONN, ENGAGE_TIME, CONTRACT_STRCOUNT,
+		CONTRACT_ENDCOUNT,
+		PASSTIME, STATUS, ADDTIME
+	</sql>
+
+	<select id="list" parameterType="pd" resultType="EmployeeRegister">
+			select
+			a.ID, a.CYZG_CARD, a.NAME, a.SEX, a.BORNDATE, a.IDCARD, a.ADDRESS, a.PHONE, a.DRIVE_CARD,
+			a.DRIVE_START_DATE, a.CARID, a.CARTYPE, a.COMPANY, a.ENGAGE_CONN, a.ENGAGE_TIME, a.CONTRACT_STRCOUNT,
+			a.CONTRACT_ENDCOUNT, a.PASSTIME, a.STATUS, a.ADDTIME, b.PERSONAL_ID as personalId
+		from tb_employee_register a , tb_employee b
+		where
+		1 = 1 and a.IDCARD = b.IDCARD
+			<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND a.STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND a.COMPANY = #{company}
+			</if>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+			select
+			a.ID, a.CYZG_CARD, a.NAME, a.SEX, a.BORNDATE, a.IDCARD, a.ADDRESS, a.PHONE, a.DRIVE_CARD,
+			a.DRIVE_START_DATE, a.CARID, a.CARTYPE, a.COMPANY, a.ENGAGE_CONN, a.ENGAGE_TIME, a.CONTRACT_STRCOUNT,
+			a.CONTRACT_ENDCOUNT, a.PASSTIME, a.STATUS, a.ADDTIME, b.PERSONAL_ID as personalId
+		from tb_employee_register a , tb_employee b
+		where
+		1 = 1 and a.IDCARD = b.IDCARD
+			<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="status!=null and status!=''">
+			AND a.STATUS = #{status}
+			</if>
+			<if test="company!=null and company!=''">
+			AND a.COMPANY = #{company}
+			</if>
+	</select>
+
+
+	
+	<select id="selectById" parameterType="String" resultType="EmployeeRegister">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee_register
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="delete" parameterType="pd">
+		delete from tb_employee_register
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="pd">
+		insert into tb_employee_register
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="cyzg_card != null">
+				CYZG_CARD,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="borndate != null">
+				BORNDATE,
+			</if>
+			<if test="idcard != null">
+				IDCARD,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="phone != null">
+				PHONE,
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD,
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE,
+			</if>
+			<if test="carid != null">
+				CARID,
+			</if>
+			<if test="idcard != null">
+				CARTYPE,
+			</if>
+			<if test="company != null">
+				COMPANY,
+			</if>
+			<if test="engage_conn != null">
+				ENGAGE_CONN,
+			</if>
+			<if test="engage_time != null">
+				ENGAGE_TIME,
+			</if>
+			<if test="contract_strcount != null">
+				CONTRACT_STRCOUNT,
+			</if>
+			<if test="contract_endcount != null">
+				CONTRACT_ENDCOUNT,
+			</if>
+			<if test="passtime != null">
+				PASSTIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzg_card != null">
+				#{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				#{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				#{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				#{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				#{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				#{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				#{cartype,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="engage_conn != null">
+				#{engage_conn,jdbcType=VARCHAR},
+			</if>
+			<if test="engage_time != null">
+				#{engage_time,jdbcType=VARCHAR},
+			</if>
+			<if test="contract_strcount != null">
+				#{contract_strcount,jdbcType=VARCHAR},
+			</if>
+			<if test="contract_endcount != null">
+				#{contract_endcount,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				#{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="pd">
+		update tb_employee_register
+		<set>
+			<if test="cyzg_card != null">
+				CYZG_CARD = #{cyzg_card,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				BORNDATE = #{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				IDCARD = #{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_card != null">
+				DRIVE_CARD = #{drive_card,jdbcType=VARCHAR},
+			</if>
+			<if test="drive_start_date != null">
+				DRIVE_START_DATE = #{drive_start_date,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				CARID = #{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="cartype != null">
+				CARTYPE = #{cartype,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="engage_conn != null">
+				ENGAGE_CONN = #{engage_conn,jdbcType=VARCHAR},
+			</if>
+			<if test="engage_time != null">
+				ENGAGE_TIME = #{engage_time,jdbcType=VARCHAR},
+			</if>
+			<if test="contract_strcount != null">
+				CONTRACT_STRCOUNT = #{contract_strcount,jdbcType=VARCHAR},
+			</if>
+			<if test="contract_endcount != null">
+				CONTRACT_ENDCOUNT = #{contract_endcount,jdbcType=VARCHAR},
+			</if>
+			<if test="passtime != null">
+				PASSTIME = #{passtime,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateStatus" parameterType="pd">
+		update tb_employee_register set STATUS = #{status,jdbcType=VARCHAR},
+		PASSTIME= #{passtime,jdbcType=VARCHAR}
+		where ID in
+  			 <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+</mapper>

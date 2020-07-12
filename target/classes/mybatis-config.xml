@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 配置全局属性 -->
+<!-- 	<settings> -->
+		<!-- 打印查询语句 -->
+<!-- 		<setting name="logImpl" value="STDOUT_LOGGING" /> -->
+<!-- 	</settings> -->
+
+	<typeAliases>
+		<typeAlias type="cn.slkj.taxi.entity.User" alias="User" />
+		<typeAlias type="cn.slkj.taxi.entity.Role" alias="Role" />
+		<typeAlias type="cn.slkj.taxi.entity.Menu" alias="Menu" />
+		<typeAlias type="cn.slkj.taxi.util.PageData" alias="pd" />
+		<typeAlias type="cn.slkj.taxi.entity.Employee" alias="Employee" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeRank" alias="EmployeeRank" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeOrgan" alias="EmployeeOrgan" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeRegister" alias="EmployeeRegister" />
+		<typeAlias type="cn.slkj.taxi.entity.ChangeCompany" alias="ChangeCompany" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeCancel" alias="EmployeeCancel" />
+		<typeAlias type="cn.slkj.taxi.entity.CancelRegfile" alias="CancelRegfile" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeRepairSign" alias="EmployeeRepairSign" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeReplaceSign" alias="EmployeeReplaceSign" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeContinueRegister" alias="EmployeeContinueRegister" />
+		<typeAlias type="cn.slkj.taxi.entity.EmployeeRank" alias="EmployeeRank" />
+		<typeAlias type="cn.slkj.taxi.entity.Enterprise" alias="Enterprise" />
+		<typeAlias type="cn.slkj.taxi.entity.EnterpriseEval" alias="EnterpriseEval" />
+		<typeAlias type="cn.slkj.taxi.entity.Taxicar" alias="Taxicar" />
+		<typeAlias type="cn.slkj.taxi.entity.TaxicarCheck" alias="TaxicarCheck" />
+		<typeAlias type="cn.slkj.taxi.entity.Examine" alias="Examine" />
+		<typeAlias type="cn.slkj.taxi.entity.ExamineStandard" alias="ExamineStandard" />
+		<typeAlias type="cn.slkj.taxi.entity.TaxiCarApply" alias="TaxiCarApply" />
+		<typeAlias type="cn.slkj.taxi.entity.cases.Anjian" alias="Anjian" />
+		<typeAlias type="cn.slkj.taxi.entity.cases.Zfry" alias="Zfry" />
+		<typeAlias type="cn.slkj.taxi.entity.cases.Anyou" alias="Anyou" />
+		
+	</typeAliases>
+	<plugins>
+		<plugin
+			interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.github.miemiedev.mybatis.paginator.dialect.SQLServer2005Dialect" />
+		</plugin>
+	</plugins>
+</configuration>

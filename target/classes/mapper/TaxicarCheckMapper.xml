@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.TaxicarCheckMapper">
+	<sql id="sql_base">
+		id, operatingnum, annualdate, nextannualdate, vehicle, addtime, status
+	</sql>
+	
+	<select id="getCheckList"  parameterType="pd" resultType="TaxicarCheck">
+		SELECT
+		<include refid="sql_base"></include>
+		FROM TB_TAXICAR_CHECK
+		<where>
+			<if test="operatingnum != null and operatingnum != ''">
+				AND operatingnum LIKE '%'+#{operatingnum}+'%'
+			</if>
+		</where>
+	</select>
+	<select id="excelList"  parameterType="pd" resultType="pd">
+		SELECT
+		<include refid="sql_base"></include>
+		FROM TB_TAXICAR_CHECK
+		<where>
+			<if test="operatingnum != null and operatingnum != ''">
+				AND operatingnum LIKE '%'+#{operatingnum}+'%'
+			</if>
+			<if test="status != null and status != ''">
+				AND status != 0
+			</if>
+		</where>
+	</select>
+	<select id="getOutCheckList"  parameterType="pd" resultType="TaxicarCheck">
+		SELECT
+		<include refid="sql_base"></include>
+		FROM TB_TAXICAR_CHECK where 1=1 and (status=1 or status=2 or status=3) 
+		<!-- <where> -->
+			<if test="operatingnum != null and operatingnum != ''">
+				AND operatingnum LIKE '%'+#{operatingnum}+'%'
+			</if>			
+		<!-- </where> -->
+	</select>
+	<insert id="saveCheck" parameterType="pd">
+		INSERT INTO TB_TAXICAR_CHECK (id, operatingnum, annualdate, 
+		nextannualdate, vehicle, addtime, status)
+		VALUES(#{id},#{operatingnum}, #{annualdate}, #{nextannualdate}, #{vehicle}, #{addtime},
+		#{status})
+	</insert>
+	<update id="editCheck" parameterType="pd">
+		update  tb_taxicar_check
+			set 
+				annualdate = #{annualdate},
+				nextannualdate = #{nextannualdate},
+				vehicle = #{vehicle}
+			where 
+				id = #{id}
+	</update>
+		
+	<select id="queryOneCheck" parameterType="pd" resultType="TaxicarCheck">
+		select 
+		<include refid="sql_base"></include>
+		from 
+			tb_taxicar_check
+		<where>
+			<if test="id != null and id != ''">
+				AND ID = #{id}
+			</if>
+			<if test="operatingnum != null and operatingnum != ''">
+				AND operatingnum = #{operatingnum}
+			</if>
+		</where>
+	</select>	
+	
+	<delete id="deleteCheck" parameterType="String">
+		delete from tb_taxicar_check 
+		where 
+			ID = #{id}
+	</delete>
+	
+ 	<select id="checkDateByOper" parameterType="String" resultType="TaxicarCheck">
+	 	SELECT
+		<include refid="sql_base"></include>  
+		FROM
+			tb_taxicar_check
+		WHERE
+			NEXTANNUALDATE >= CONVERT(varchar(20),GETDATE(),120) AND STATUS = '0'
+			AND SUBSTRING(ADDTIME,1,10) = CONVERT(varchar(20),GETDATE(),23)
+			AND OPERATINGNUM = #{operatingnum}
+	</select>
+	<update id="changeStatus"  parameterType="pd">
+		update  tb_taxicar_check
+			set 
+				STATUS = #{status}
+			where 
+				ID = #{id}
+	</update>
+	
+</mapper>

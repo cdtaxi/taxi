@@ -1,0 +1,1048 @@
+
+[
+	{
+		"id": "1",
+		"parent_id": "0",
+		"name": "根模块",
+		"type": "菜单",
+		"url": "#",
+		"priority": 1,
+		"icon": null,
+		"description": null,
+		"children": [
+			{
+				"id": "2",
+				"parent_id": "1",
+				"name": "车辆管理",
+				"type": "菜单",
+				"url": "#",
+				"priority": 1,
+				"icon": "images/icons/32X32/customers.gif",
+				"description": null,
+				"children": [
+					{
+						"id": "6",
+						"parent_id": "2",
+						"name": "客运管理",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=001",
+						"priority": 1,
+						"icon": "images/icons/32X32/car_ky.png",
+						"description": "",
+						"children": [
+							{
+								"id": "54",
+								"parent_id": "6",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "56",
+								"parent_id": "6",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑车辆",
+								"children": []
+							},
+							{
+								"id": "57",
+								"parent_id": "6",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "7",
+						"parent_id": "2",
+						"name": "货运管理",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=002",
+						"priority": 2,
+						"icon": "images/icons/32X32/car_hy.png",
+						"description": "",
+						"children": [
+							{
+								"id": "55",
+								"parent_id": "7",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "58",
+								"parent_id": "7",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "59",
+								"parent_id": "7",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "8",
+						"parent_id": "2",
+						"name": "出租车管理",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=004",
+						"priority": 3,
+						"icon": "images/icons/32X32/car_cz.png",
+						"description": "",
+						"children": [
+							{
+								"id": "60",
+								"parent_id": "8",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "61",
+								"parent_id": "8",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑车辆",
+								"children": []
+							},
+							{
+								"id": "62",
+								"parent_id": "8",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "9",
+						"parent_id": "2",
+						"name": "旅游车管理",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=005",
+						"priority": 4,
+						"icon": "images/icons/32X32/car_ly.png",
+						"description": "",
+						"children": [
+							{
+								"id": "63",
+								"parent_id": "9",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "66",
+								"parent_id": "9",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons-24",
+								"description": "编辑车辆",
+								"children": []
+							},
+							{
+								"id": "69",
+								"parent_id": "9",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "10",
+						"parent_id": "2",
+						"name": "公交车管理",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=003",
+						"priority": 5,
+						"icon": "images/icons/32X32/car_gj.png",
+						"description": "",
+						"children": [
+							{
+								"id": "64",
+								"parent_id": "10",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "67",
+								"parent_id": "10",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑车辆",
+								"children": []
+							},
+							{
+								"id": "70",
+								"parent_id": "10",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "36",
+						"parent_id": "2",
+						"name": "商务用车",
+						"type": "菜单",
+						"url": "vehicle/list.jsp?carUseNatu=006",
+						"priority": 6,
+						"icon": "images/icons/32X32/car_cz.png",
+						"description": "",
+						"children": [
+							{
+								"id": "65",
+								"parent_id": "36",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加车辆",
+								"children": []
+							},
+							{
+								"id": "68",
+								"parent_id": "36",
+								"name": "编辑",
+								"type": "功能",
+								"url": "edit",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑车辆",
+								"children": []
+							},
+							{
+								"id": "71",
+								"parent_id": "36",
+								"name": "删除",
+								"type": "功能",
+								"url": "del",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆",
+								"children": []
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "3",
+				"parent_id": "1",
+				"name": "人员管理",
+				"type": "菜单",
+				"url": "#",
+				"priority": 2,
+				"icon": "images/icons/32X32/customers.gif",
+				"description": null,
+				"children": [
+					{
+						"id": "11",
+						"parent_id": "3",
+						"name": "驾驶员管理",
+						"type": "菜单",
+						"url": "person/personList.jsp?qType=1",
+						"priority": 1,
+						"icon": "images/icons/function_icon_set/user_48.png",
+						"description": "",
+						"children": [
+							{
+								"id": "72",
+								"parent_id": "11",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "添加驾驶员",
+								"children": []
+							},
+							{
+								"id": "73",
+								"parent_id": "11",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "编辑驾驶员",
+								"children": []
+							},
+							{
+								"id": "74",
+								"parent_id": "11",
+								"name": "删除",
+								"type": "功能",
+								"url": "deleteFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "删除驾驶员",
+								"children": []
+							},
+							{
+								"id": "81",
+								"parent_id": "11",
+								"name": "添加违章记录",
+								"type": "功能",
+								"url": "addDriver",
+								"priority": 4,
+								"icon": "icons_11",
+								"description": "添加违章记录",
+								"children": []
+							},
+							{
+								"id": "82",
+								"parent_id": "11",
+								"name": "添加驾驶证审验记录",
+								"type": "功能",
+								"url": "addExzm",
+								"priority": 5,
+								"icon": "icons_11",
+								"description": "添加驾驶证审验记录",
+								"children": []
+							},
+							{
+								"id": "83",
+								"parent_id": "11",
+								"name": "添加服务记录",
+								"type": "功能",
+								"url": "addUnit",
+								"priority": 6,
+								"icon": "icons_11",
+								"description": "添加服务记录",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "13",
+						"parent_id": "3",
+						"name": "押运员管理",
+						"type": "菜单",
+						"url": "person/personList.jsp?qType=2",
+						"priority": 2,
+						"icon": "images/icons/function_icon_set/user_48.png",
+						"description": "",
+						"children": [
+							{
+								"id": "78",
+								"parent_id": "13",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "添加押运员",
+								"children": []
+							},
+							{
+								"id": "79",
+								"parent_id": "13",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "编辑押运员",
+								"children": []
+							},
+							{
+								"id": "80",
+								"parent_id": "13",
+								"name": "删除",
+								"type": "功能",
+								"url": "deleteFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "删除押运员",
+								"children": []
+							},
+							{
+								"id": "85",
+								"parent_id": "13",
+								"name": "添加服务记录",
+								"type": "功能",
+								"url": "addUnit",
+								"priority": 4,
+								"icon": "icons_11",
+								"description": "添加服务记录",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "12",
+						"parent_id": "3",
+						"name": "乘务员管理",
+						"type": "菜单",
+						"url": "person/personList.jsp?qType=3",
+						"priority": 3,
+						"icon": "images/icons/function_icon_set/user_48.png",
+						"description": "",
+						"children": [
+							{
+								"id": "75",
+								"parent_id": "12",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "添加乘务员",
+								"children": []
+							},
+							{
+								"id": "76",
+								"parent_id": "12",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "编辑乘务员",
+								"children": []
+							},
+							{
+								"id": "77",
+								"parent_id": "12",
+								"name": "删除",
+								"type": "功能",
+								"url": "deleteFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "删除乘务员",
+								"children": []
+							},
+							{
+								"id": "84",
+								"parent_id": "12",
+								"name": "添加服务记录",
+								"type": "功能",
+								"url": "addUnit",
+								"priority": 4,
+								"icon": "icons_11",
+								"description": "添加服务记录",
+								"children": []
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "4",
+				"parent_id": "1",
+				"name": "车辆业务",
+				"type": "菜单",
+				"url": "#",
+				"priority": 3,
+				"icon": "images/icons/32X32/customers.gif",
+				"description": null,
+				"children": [
+					{
+						"id": "14",
+						"parent_id": "4",
+						"name": "车辆行驶证",
+						"type": "菜单",
+						"url": "driving/list.jsp",
+						"priority": 1,
+						"icon": "images/icons/32X32/my_account.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "96",
+								"parent_id": "14",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 2,
+								"icon": "icons_11",
+								"description": "添加机动车行驶证信息",
+								"children": []
+							},
+							{
+								"id": "97",
+								"parent_id": "14",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑行驶证",
+								"children": []
+							},
+							{
+								"id": "98",
+								"parent_id": "14",
+								"name": "删除",
+								"type": "功能",
+								"url": "delFun",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除车辆行驶证",
+								"children": []
+							},
+							{
+								"id": "101",
+								"parent_id": "14",
+								"name": "行驶证审验",
+								"type": "菜单",
+								"url": "derRecord",
+								"priority": 99,
+								"icon": "icons_70",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "100",
+								"parent_id": "14",
+								"name": "审验记录",
+								"type": "功能",
+								"url": "facRecord",
+								"priority": 99,
+								"icon": "icons_26",
+								"description": "车辆行驶证审验",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "15",
+						"parent_id": "4",
+						"name": "车辆运输证",
+						"type": "菜单",
+						"url": "transport/list.jsp",
+						"priority": 2,
+						"icon": "images/icons/32X32/credit_card.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "116",
+								"parent_id": "15",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "117",
+								"parent_id": "15",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "118",
+								"parent_id": "15",
+								"name": "删除",
+								"type": "功能",
+								"url": "delFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "119",
+								"parent_id": "15",
+								"name": "审验记录",
+								"type": "功能",
+								"url": "facRecord",
+								"priority": 4,
+								"icon": "icons_26",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "120",
+								"parent_id": "15",
+								"name": "运输证年检",
+								"type": "功能",
+								"url": "derRecord",
+								"priority": 5,
+								"icon": "icons_70",
+								"description": "",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "16",
+						"parent_id": "4",
+						"name": "车辆二级维护",
+						"type": "菜单",
+						"url": "second/list.jsp",
+						"priority": 3,
+						"icon": "images/icons/32X32/invoice.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "107",
+								"parent_id": "16",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "108",
+								"parent_id": "16",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "109",
+								"parent_id": "16",
+								"name": "删除",
+								"type": "功能",
+								"url": "delFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "115",
+								"parent_id": "16",
+								"name": "二级维护记录",
+								"type": "功能",
+								"url": "listByCar",
+								"priority": 4,
+								"icon": "icons_26",
+								"description": "",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "17",
+						"parent_id": "4",
+						"name": "卫星定位服务",
+						"type": "菜单",
+						"url": "global/list.jsp",
+						"priority": 4,
+						"icon": "images/icons/32X32/world.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "102",
+								"parent_id": "17",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "添加车辆联网联控卫星定位入网证明",
+								"children": []
+							},
+							{
+								"id": "103",
+								"parent_id": "17",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 3,
+								"icon": "icons_24",
+								"description": "编辑入网证明",
+								"children": []
+							},
+							{
+								"id": "104",
+								"parent_id": "17",
+								"name": "删除",
+								"type": "功能",
+								"url": "delFun",
+								"priority": 4,
+								"icon": "icons_12",
+								"description": "删除卫星定位",
+								"children": []
+							},
+							{
+								"id": "113",
+								"parent_id": "17",
+								"name": "设备安装入网记录",
+								"type": "功能",
+								"url": "sbaz",
+								"priority": 99,
+								"icon": "icons_44",
+								"description": "",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "106",
+						"parent_id": "4",
+						"name": "车辆保险",
+						"type": "菜单",
+						"url": "insurance/list.jsp",
+						"priority": 5,
+						"icon": "images/icons/32X32/billing.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "110",
+								"parent_id": "106",
+								"name": "添加",
+								"type": "功能",
+								"url": "addFun",
+								"priority": 1,
+								"icon": "icons_11",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "111",
+								"parent_id": "106",
+								"name": "编辑",
+								"type": "功能",
+								"url": "editFun",
+								"priority": 2,
+								"icon": "icons_24",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "112",
+								"parent_id": "106",
+								"name": "删除",
+								"type": "功能",
+								"url": "delFun",
+								"priority": 3,
+								"icon": "icons_12",
+								"description": "",
+								"children": []
+							},
+							{
+								"id": "114",
+								"parent_id": "106",
+								"name": "保险记录",
+								"type": "功能",
+								"url": "listByCar",
+								"priority": 4,
+								"icon": "icons_26",
+								"description": "",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "18",
+						"parent_id": "4",
+						"name": "转移登记",
+						"type": "菜单",
+						"url": "#",
+						"priority": 6,
+						"icon": "images/icons/32X32/customers.gif",
+						"description": null,
+						"children": []
+					}
+				]
+			},
+			{
+				"id": "5",
+				"parent_id": "1",
+				"name": "系统管理",
+				"type": "菜单",
+				"url": "#",
+				"priority": 4,
+				"icon": "images/icons/32X32/customers.gif",
+				"description": null,
+				"children": [
+					{
+						"id": "19",
+						"parent_id": "5",
+						"name": "机构管理",
+						"type": "菜单",
+						"url": "department/department.jsp",
+						"priority": 1,
+						"icon": "images/icons/32X32/drawings.gif",
+						"description": "",
+						"children": []
+					},
+					{
+						"id": "20",
+						"parent_id": "5",
+						"name": "用户管理",
+						"type": "菜单",
+						"url": "user/list.jsp",
+						"priority": 2,
+						"icon": "images/icons/32X32/customers.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "50",
+								"parent_id": "20",
+								"name": "添加用户",
+								"type": "功能",
+								"url": "user/add",
+								"priority": 99,
+								"icon": "",
+								"description": "添加用户",
+								"children": []
+							},
+							{
+								"id": "51",
+								"parent_id": "20",
+								"name": "编辑用户",
+								"type": "功能",
+								"url": "user/edit",
+								"priority": 99,
+								"icon": "",
+								"description": "编辑用户",
+								"children": []
+							},
+							{
+								"id": "52",
+								"parent_id": "20",
+								"name": "删除用户",
+								"type": "功能",
+								"url": "user/deletes",
+								"priority": 99,
+								"icon": "",
+								"description": "删除用户",
+								"children": []
+							},
+							{
+								"id": "53",
+								"parent_id": "20",
+								"name": "操作权限",
+								"type": "功能",
+								"url": "user/allotRole",
+								"priority": 99,
+								"icon": "",
+								"description": "操作权限",
+								"children": []
+							},
+							{
+								"id": "86",
+								"parent_id": "20",
+								"name": "用户列表",
+								"type": "功能",
+								"url": "user/list.jsp",
+								"priority": 99,
+								"icon": "",
+								"description": "用户列表",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "21",
+						"parent_id": "5",
+						"name": "角色管理",
+						"type": "菜单",
+						"url": "role/list.jsp",
+						"priority": 3,
+						"icon": "images/icons/32X32/bestseller.gif",
+						"description": "",
+						"children": [
+							{
+								"id": "46",
+								"parent_id": "21",
+								"name": "添加角色",
+								"type": "功能",
+								"url": "role/add",
+								"priority": 99,
+								"icon": "",
+								"description": "添加角色",
+								"children": []
+							},
+							{
+								"id": "47",
+								"parent_id": "21",
+								"name": "编辑角色",
+								"type": "功能",
+								"url": "role/editModule",
+								"priority": 99,
+								"icon": "",
+								"description": "编辑角色",
+								"children": []
+							},
+							{
+								"id": "48",
+								"parent_id": "21",
+								"name": "删除角色",
+								"type": "功能",
+								"url": "role/delete",
+								"priority": 99,
+								"icon": "",
+								"description": "删除角色",
+								"children": []
+							},
+							{
+								"id": "49",
+								"parent_id": "21",
+								"name": "操作权限",
+								"type": "功能",
+								"url": "role/saveRoleRes",
+								"priority": 99,
+								"icon": "",
+								"description": "操作权限",
+								"children": []
+							},
+							{
+								"id": "87",
+								"parent_id": "21",
+								"name": "角色列表",
+								"type": "功能",
+								"url": "role/list.jsp",
+								"priority": 99,
+								"icon": "",
+								"description": "角色列表",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "22",
+						"parent_id": "5",
+						"name": "资源管理",
+						"type": "菜单",
+						"url": "module/module.jsp",
+						"priority": 4,
+						"icon": "images/icons/32X32/administrative_docs.gif",
+						"description": "资源管理",
+						"children": [
+							{
+								"id": "42",
+								"parent_id": "22",
+								"name": "删除资源",
+								"type": "功能",
+								"url": "module/deleteModule",
+								"priority": 99,
+								"icon": "",
+								"description": "删除资源",
+								"children": []
+							},
+							{
+								"id": "39",
+								"parent_id": "22",
+								"name": "添加资源",
+								"type": "功能",
+								"url": "module/addModule",
+								"priority": 99,
+								"icon": "",
+								"description": "\t 添加资源",
+								"children": []
+							},
+							{
+								"id": "40",
+								"parent_id": "22",
+								"name": "编辑资源",
+								"type": "功能",
+								"url": "module/editModule",
+								"priority": 99,
+								"icon": "",
+								"description": "编辑资源",
+								"children": []
+							},
+							{
+								"id": "88",
+								"parent_id": "22",
+								"name": "资源列表",
+								"type": "功能",
+								"url": "module/list",
+								"priority": 99,
+								"icon": "",
+								"description": "资源列表",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "37",
+						"parent_id": "5",
+						"name": "公司管理",
+						"type": "菜单",
+						"url": "company/list.jsp",
+						"priority": 5,
+						"icon": "images/icons/32X32/flag.gif",
+						"description": "",
+						"children": []
+					}
+				]
+			}
+		]
+	}
+]

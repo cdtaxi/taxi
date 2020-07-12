@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeMapper">
+	<resultMap id="BaseResultMap" type="Employee">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="PERSONAL_ID" jdbcType="VARCHAR" property="personalId" /><!-- 
+			档案编号 -->
+		<result column="PERMIT_FILES_ID" jdbcType="VARCHAR" property="permitFilesId" /><!-- 
+			许可案卷编号 -->
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SEX" jdbcType="VARCHAR" property="sex" />
+		<result column="BORNDATE" jdbcType="VARCHAR" property="borndate" />
+		<result column="NATIONALITY" jdbcType="VARCHAR" property="nationality" />
+		<result column="IDCARD" jdbcType="VARCHAR" property="idcard" />
+		<result column="EDUCATED" jdbcType="VARCHAR" property="educated" />
+		<result column="PHONE" jdbcType="VARCHAR" property="phone" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="DRIVE_CARD" jdbcType="VARCHAR" property="driveCard" />
+		<result column="DRIVE_START_DATE" jdbcType="VARCHAR" property="driveStartDate" />
+		<result column="DRIVE_TYPE" jdbcType="VARCHAR" property="driveType" />
+		<result column="CYZG_CARD" jdbcType="VARCHAR" property="cyzgCard" />
+		<result column="REGISTER_DATE" jdbcType="VARCHAR" property="registerDate" />
+		<result column="CANCEL_DATE" jdbcType="VARCHAR" property="cancelDate" />
+		<result column="FWZLJD_CARD" jdbcType="VARCHAR" property="fwzljdCard" />
+		<result column="FWZLJD_REPAIR_DATE" jdbcType="VARCHAR"
+			property="fwzljdRepairDate" />
+		<result column="CARID" jdbcType="VARCHAR" property="carid" />
+		<result column="CARTYPE" jdbcType="VARCHAR" property="cartype" />
+		<result column="COMPANY" jdbcType="VARCHAR" property="company" />
+		<result column="OLD_COMPANY" jdbcType="VARCHAR" property="oldCompany" />
+		<result column="ENGAGE_CONN" jdbcType="VARCHAR" property="engageConn" />
+		<result column="ENGAGE_TIME" jdbcType="VARCHAR" property="engageTime" />
+		<result column="CONTRACT_STRCOUNT" jdbcType="VARCHAR" property="contractSrtCount" />
+		<result column="CONTRACT_ENDCOUNT" jdbcType="VARCHAR" property="contractEndCount" />
+		<result column="APPROVAL_HOURS" jdbcType="VARCHAR" property="approvalHours" />
+		<result column="DECISION_HOURS" jdbcType="VARCHAR" property="decisionHours" />
+		<result column="TRAINING_UNIT" jdbcType="VARCHAR" property="trainingUnit" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="INFO_PAGES" jdbcType="VARCHAR" property="infoPages" />
+		<result column="EXAM_PAGES" jdbcType="VARCHAR" property="examPages" />
+		<result column="INVALID" jdbcType="VARCHAR" property="invalid" />
+		<result column="SFHZ" jdbcType="VARCHAR" property="sfhz" />
+		<result column="EXP_REG" jdbcType="VARCHAR" property="expReg" />
+		<result column="RE_CYZG_DATE" jdbcType="VARCHAR" property="reCyzgDate" />
+		<result column="SHZT" jdbcType="VARCHAR" property="shzt" />
+		<result column="ADDTIME" jdbcType="VARCHAR" property="addtime" />
+	</resultMap>
+
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="Employee">
+		<result column="PHOTO" jdbcType="LONGVARBINARY" property="photo" />
+	</resultMap>
+
+	<resultMap extends="BaseResultMap" id="ResultMapRank" type="Employee">
+		<result column="PHOTO" jdbcType="LONGVARBINARY" property="photo" />
+		<result column="YEAR" jdbcType="VARCHAR" property="year" />
+		<result column="RANK" jdbcType="VARCHAR" property="rank" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, PERSONAL_ID, PERMIT_FILES_ID, NAME, SEX, BORNDATE,
+		NATIONALITY,
+		IDCARD, EDUCATED,
+		PHONE, ADDRESS,
+		DRIVE_CARD,
+		DRIVE_START_DATE, DRIVE_TYPE, CYZG_CARD,
+		REGISTER_DATE,
+		CANCEL_DATE,
+		FWZLJD_CARD, FWZLJD_REPAIR_DATE,
+		CARID, CARTYPE, COMPANY,
+		OLD_COMPANY,
+		ENGAGE_CONN, ENGAGE_TIME, CONTRACT_STRCOUNT , CONTRACT_ENDCOUNT,
+		APPROVAL_HOURS,
+		DECISION_HOURS, STATUS, INFO_PAGES, EXAM_PAGES,
+		SFHZ,
+		EXP_REG, RE_CYZG_DATE, SHZT, ADDTIME
+	</sql>
+
+	<sql id="Blob_Column_List">
+		PHOTO
+	</sql>
+
+	<select id="listPage" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee
+		<where>
+			<if test="company != null and company != ''"> <!-- 公司检索条件 -->
+				AND COMPANY like '%'+ #{company}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME LIKE '%'+ #{name}+'%'
+			</if>
+			<if test="status != null and status != ''">
+				AND STATUS = #{status}
+			</if>
+		</where>
+	</select>
+	<!-- Excel列表 -->
+	<select id="excelList" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_employee
+		<where>
+			<if test="company != null and company != ''"> <!-- 公司检索条件 -->
+				AND COMPANY like '%'+ #{company}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME LIKE '%'+ #{name}+'%'
+			</if>
+			<if test="status != null and status != ''">
+				AND STATUS = #{status}
+			</if>
+			<if test="shzt != null and shzt != ''">
+				AND SHZT = '死亡'
+			</if>
+			<if test="age != null and age != ''">
+				AND (year(getdate())- SUBSTRING(BORNDATE,1,4)) >60
+			</if>
+		</where>
+	</select>
+	<!-- 死亡库 -->
+	<select id="listDie" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee where SHZT = '死亡'
+			<if test="company != null and company != ''"> <!-- 公司检索条件 -->
+				AND COMPANY like '%'+ #{company}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME LIKE '%'+ #{name}+'%'
+			</if>
+			<if test="status != null and status != ''">
+				AND STATUS = #{status}
+			</if>
+		
+	</select>
+	
+	<!-- 超龄库 -->
+	<select id="listOldAge" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee where (year(getdate())- SUBSTRING(BORNDATE,1,4)) >60
+			<if test="company != null and company != ''"> <!-- 公司检索条件 -->
+				AND COMPANY like '%'+ #{company}+'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME LIKE '%'+ #{name}+'%'
+			</if>
+			<if test="status != null and status != ''">
+				AND STATUS = #{status}
+			</if>
+		
+	</select>
+	
+	<select id="selectOne" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tb_employee
+		<where>
+			<if test="id != nll and id !=''">
+				AND ID = #{id,jdbcType=VARCHAR} 
+			</if>
+			<if test="idcard != nll and idcard !=''">
+				AND IDCARD = #{idcard,jdbcType=VARCHAR}
+			</if>
+			<if test="status != nll and status !=''">
+				AND STATUS = #{status}
+			</if>
+		</where>
+		ORDER BY ADDTIME DESC
+	</select>
+	<delete id="deleteById" parameterType="hashMap">
+		DELETE FROM tb_employee WHERE ID = #{id} AND ID != '1'
+	</delete>
+
+	<select id="slistPage" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee
+		<where>
+			<if test="company != nll and company !=''">
+				AND COMPANY = #{company}
+			</if>
+			<if test="status != nll and status !=''">
+				AND STATUS = #{status}
+			</if>
+			<if test="name != nll and name !=''">
+				AND NAME LIKE '%'+ #{name}+'%'
+			</if>
+		</where>
+	</select>
+	<insert id="insertSelective" parameterType="pd">
+		INSERT INTO TB_EMPLOYEE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="personalId != null">PERSONAL_ID,</if>
+			<if test="permitFilesId != null">PERMIT_FILES_ID,</if>
+			<if test="name != null">NAME, </if>
+			<if test="sex != null"> SEX, </if>
+			<if test="borndate != null"> BORNDATE, </if>
+			<if test="nationality != null"> NATIONALITY, </if>
+			<if test="idcard != null"> IDCARD, </if>
+			<if test="educated != null"> EDUCATED, </if>
+			<if test="phone != null"> PHONE, </if>
+			<if test="address != null"> ADDRESS, </if>
+			<if test="driveCard != null"> DRIVE_CARD, </if>
+			<if test="driveStartDate != null"> DRIVE_START_DATE, </if>
+			<if test="driveType != null"> DRIVE_TYPE, </if>
+			<if test="cyzgCard != null"> CYZG_CARD, </if>
+			<if test="registerDate != null"> REGISTER_DATE, </if>
+			<if test="cancelDate != null"> CANCEL_DATE, </if>
+			<if test="fwzljdCard != null"> FWZLJD_CARD, </if>
+			<if test="fwzljdRepairDate != null"> FWZLJD_REPAIR_DATE, </if>
+			<if test="carid != null"> CARID, </if>
+			<if test="cartype != null"> CARTYPE, </if>
+			<if test="company != null"> COMPANY, </if>
+			<if test="oldCompany != null"> OLD_COMPANY, </if>
+			<if test="engageConn != null"> ENGAGE_CONN, </if>
+			<if test="engageTime != null"> ENGAGE_TIME, </if>
+			<if test="contractSrtCount != null"> CONTRACT_STRCOUNT, </if>
+			<if test="contractEndCount != null"> CONTRACT_ENDCOUNT, </if>
+			<if test="approvalHours != null"> APPROVAL_HOURS, </if>
+			<if test="decisionHours != null"> DECISION_HOURS, </if>
+			<if test="trainingUnit != null"> TRAINING_UNIT, </if>
+			<if test="status != null"> STATUS, </if>
+			<if test="infoPages != null"> INFO_PAGES, </if>
+			<if test="examPages != null"> EXAM_PAGES, </if>
+			<if test="invalid != null"> INVALID, </if>
+			<if test="sfhz != null"> SFHZ, </if>
+			<if test="expReg != null"> EXP_REG, </if>
+			<if test="reCyzgDate != null"> RE_CYZG_DATE, </if>
+			<if test="shzt != null"> SHZT, </if>
+			<if test="addtime != null"> ADDTIME, </if>
+			<if test="photo != null"> PHOTO, </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null"> #{id,jdbcType=VARCHAR}, </if>
+			<if test="personalId != null"> #{personalId,jdbcType=VARCHAR}, </if>
+			<if test="permitFilesId != null"> #{permitFilesId,jdbcType=VARCHAR}, </if>
+			<if test="name != null"> #{name,jdbcType=VARCHAR}, </if>
+			<if test="sex != null"> #{sex,jdbcType=VARCHAR}, </if>
+			<if test="borndate != null"> #{borndate,jdbcType=VARCHAR}, </if>
+			<if test="nationality != null"> #{nationality,jdbcType=VARCHAR}, </if>
+			<if test="idcard != null"> #{idcard,jdbcType=VARCHAR}, </if>
+			<if test="educated != null"> #{educated,jdbcType=VARCHAR}, </if>
+			<if test="phone != null"> #{phone,jdbcType=VARCHAR}, </if>
+			<if test="address != null"> #{address,jdbcType=VARCHAR}, </if>
+			<if test="driveCard != null"> #{driveCard,jdbcType=VARCHAR}, </if>
+			<if test="driveStartDate != null"> #{driveStartDate,jdbcType=VARCHAR}, </if>
+			<if test="driveType != null"> #{driveType,jdbcType=VARCHAR}, </if>
+			<if test="cyzgCard != null"> #{cyzgCard,jdbcType=VARCHAR}, </if>
+			<if test="registerDate != null"> #{registerDate,jdbcType=VARCHAR}, </if>
+			<if test="cancelDate != null"> #{cancelDate,jdbcType=VARCHAR}, </if>
+			<if test="fwzljdCard != null"> #{fwzljdCard,jdbcType=VARCHAR}, </if>
+			<if test="fwzljdRepairDate != null"> #{fwzljdRepairDate,jdbcType=VARCHAR}, </if>
+			<if test="carid != null"> #{carid,jdbcType=VARCHAR}, </if>
+			<if test="cartype != null"> #{cartype,jdbcType=VARCHAR}, </if>
+			<if test="company != null"> #{company,jdbcType=VARCHAR}, </if>
+			<if test="oldCompany != null"> #{oldCompany,jdbcType=VARCHAR}, </if>
+			<if test="engageConn != null"> #{engageConn,jdbcType=VARCHAR}, </if>
+			<if test="engageTime != null"> #{engageTime,jdbcType=VARCHAR}, </if>
+			<if test="contractSrtCount != null"> #{contractSrtCount,jdbcType=VARCHAR}, </if>
+			<if test="contractEndCount != null"> #{contractEndCount,jdbcType=VARCHAR}, </if>
+			<if test="approvalHours != null"> #{approvalHours,jdbcType=VARCHAR}, </if>
+			<if test="decisionHours != null"> #{decisionHours,jdbcType=VARCHAR}, </if>
+			<if test="trainingUnit != null"> #{trainingUnit,jdbcType=VARCHAR}, </if>
+			<if test="status != null"> #{status,jdbcType=VARCHAR}, </if>
+			<if test="infoPages != null"> #{infoPages,jdbcType=VARCHAR}, </if>
+			<if test="examPages != null"> #{examPages,jdbcType=VARCHAR}, </if>
+			<if test="invalid != null"> #{invalid,jdbcType=VARCHAR}, </if>
+			<if test="sfhz != null"> #{sfhz,jdbcType=VARCHAR}, </if>
+			<if test="expReg != null"> #{expReg,jdbcType=VARCHAR}, </if>
+			<if test="reCyzgDate != null"> #{reCyzgDate,jdbcType=VARCHAR}, </if>
+			<if test="shzt != null"> #{shzt,jdbcType=VARCHAR}, </if>
+			<if test="addtime != null"> #{addtime,jdbcType=VARCHAR}, </if>
+			<if test="photo != null"> #{photo,jdbcType=LONGVARBINARY}, </if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="pd">
+		update tb_employee
+		<set>
+			<if test="personalId != null">
+				PERSONAL_ID = #{personalId,jdbcType=VARCHAR},
+			</if>
+			<if test="permitFilesId != null">
+				PERMIT_FILES_ID = #{permitFilesId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				BORNDATE = #{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="nationality != null">
+				NATIONALITY = #{nationality,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				IDCARD = #{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="educated != null">
+				EDUCATED = #{educated,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="driveCard != null">
+				DRIVE_CARD = #{driveCard,jdbcType=VARCHAR},
+			</if>
+			<if test="driveStartDate != null">
+				DRIVE_START_DATE = #{driveStartDate,jdbcType=VARCHAR},
+			</if>
+			<if test="driveType != null">
+				DRIVE_TYPE = #{driveType,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzgCard != null">
+				CYZG_CARD = #{cyzgCard,jdbcType=VARCHAR},
+			</if>
+			<if test="registerDate != null">
+				REGISTER_DATE = #{registerDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cancelDate != null">
+				CANCEL_DATE = #{cancelDate,jdbcType=VARCHAR},
+			</if>
+			<if test="fwzljdCard != null">
+				FWZLJD_CARD = #{fwzljdCard,jdbcType=VARCHAR},
+			</if>
+			<if test="fwzljdRepairDate != null">
+				FWZLJD_REPAIR_DATE = #{fwzljdRepairDate,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				CARID = #{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="cartype != null">
+				CARTYPE = #{cartype,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="oldCompany != null">
+				OLD_COMPANY = #{oldCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="engageConn != null">
+				ENGAGE_CONN = #{engageConn,jdbcType=VARCHAR},
+			</if>
+			<if test="engageTime != null">
+				ENGAGE_TIME = #{engageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="contractSrtCount != null">
+				CONTRACT_STRCOUNT = #{contractSrtCount,jdbcType=VARCHAR},
+			</if>
+			<if test="contractEndCount != null">
+				CONTRACT_ENDCOUNT = #{contractEndCount,jdbcType=VARCHAR},
+			</if>
+			<if test="approvalHours != null">
+				APPROVAL_HOURS = #{approvalHours,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionHours != null">
+				DECISION_HOURS = #{decisionHours,jdbcType=VARCHAR},
+			</if>
+			<if test="trainingUnit != null">
+				TRAINING_UNIT = #{trainingUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="infoPages != null">
+				INFO_PAGES = #{infoPages,jdbcType=VARCHAR},
+			</if>
+			<if test="examPages != null">
+				EXAM_PAGES = #{examPages,jdbcType=VARCHAR},
+			</if>
+			<if test="invalid != null">
+				INVALID = #{invalid,jdbcType=VARCHAR},
+			</if>
+			<if test="sfhz != null">
+				SFHZ = #{sfhz,jdbcType=VARCHAR},
+			</if>
+			<if test="expReg != null">
+				EXP_REG = #{expReg,jdbcType=VARCHAR},
+			</if>
+			<if test="reCyzgDate != null">
+				RE_CYZG_DATE = #{reCyzgDate,jdbcType=VARCHAR},
+			</if>
+			<if test="shzt != null">
+				SHZT = #{shzt,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null">
+				PHOTO = #{photo,jdbcType=LONGVARBINARY},
+			</if>
+		</set>
+		where 
+			ID = #{id,jdbcType=VARCHAR} 
+	</update>
+	<update id="updateByIDCard" parameterType="pd">
+		update tb_employee
+		<set>
+			<if test="personalId != null">
+				PERSONAL_ID = #{personalId,jdbcType=VARCHAR},
+			</if>
+			<if test="permitFilesId != null">
+				PERMIT_FILES_ID = #{permitFilesId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="borndate != null">
+				BORNDATE = #{borndate,jdbcType=VARCHAR},
+			</if>
+			<if test="nationality != null">
+				NATIONALITY = #{nationality,jdbcType=VARCHAR},
+			</if>
+			<if test="idcard != null">
+				IDCARD = #{idcard,jdbcType=VARCHAR},
+			</if>
+			<if test="educated != null">
+				EDUCATED = #{educated,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="driveCard != null">
+				DRIVE_CARD = #{driveCard,jdbcType=VARCHAR},
+			</if>
+			<if test="driveStartDate != null">
+				DRIVE_START_DATE = #{driveStartDate,jdbcType=VARCHAR},
+			</if>
+			<if test="driveType != null">
+				DRIVE_TYPE = #{driveType,jdbcType=VARCHAR},
+			</if>
+			<if test="cyzgCard != null">
+				CYZG_CARD = #{cyzgCard,jdbcType=VARCHAR},
+			</if>
+			<if test="registerDate != null">
+				REGISTER_DATE = #{registerDate,jdbcType=VARCHAR},
+			</if>
+			<if test="cancelDate != null">
+				CANCEL_DATE = #{cancelDate,jdbcType=VARCHAR},
+			</if>
+			<if test="fwzljdCard != null">
+				FWZLJD_CARD = #{fwzljdCard,jdbcType=VARCHAR},
+			</if>
+			<if test="fwzljdRepairDate != null">
+				FWZLJD_REPAIR_DATE = #{fwzljdRepairDate,jdbcType=VARCHAR},
+			</if>
+			<if test="carid != null">
+				CARID = #{carid,jdbcType=VARCHAR},
+			</if>
+			<if test="cartype != null">
+				CARTYPE = #{cartype,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="oldCompany != null">
+				OLD_COMPANY = #{oldCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="engageConn != null">
+				ENGAGE_CONN = #{engageConn,jdbcType=VARCHAR},
+			</if>
+			<if test="engageTime != null">
+				ENGAGE_TIME = #{engageTime,jdbcType=VARCHAR},
+			</if>
+			<if test="contractSrtCount != null">
+				CONTRACT_STRCOUNT = #{contractSrtCount,jdbcType=VARCHAR},
+			</if>
+			<if test="contractEndCount != null">
+				CONTRACT_ENDCOUNT = #{contractEndCount,jdbcType=VARCHAR},
+			</if>
+			<if test="approvalHours != null">
+				APPROVAL_HOURS = #{approvalHours,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionHours != null">
+				DECISION_HOURS = #{decisionHours,jdbcType=VARCHAR},
+			</if>
+			<if test="trainingUnit != null">
+				TRAINING_UNIT = #{trainingUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="infoPages != null">
+				INFO_PAGES = #{infoPages,jdbcType=VARCHAR},
+			</if>
+			<if test="examPages != null">
+				EXAM_PAGES = #{examPages,jdbcType=VARCHAR},
+			</if>
+			<if test="invalid != null">
+				INVALID = #{invalid,jdbcType=VARCHAR},
+			</if>
+			<if test="sfhz != null">
+				SFHZ = #{sfhz,jdbcType=VARCHAR},
+			</if>
+			<if test="expReg != null">
+				EXP_REG = #{expReg,jdbcType=VARCHAR},
+			</if>
+			<if test="reCyzgDate != null">
+				RE_CYZG_DATE = #{reCyzgDate,jdbcType=VARCHAR},
+			</if>
+			<if test="shzt != null">
+				SHZT = #{shzt,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null">
+				PHOTO = #{photo,jdbcType=LONGVARBINARY},
+			</if>
+		</set>
+		where 
+			IDCARD = #{idcard,jdbcType=VARCHAR}
+	</update>
+</mapper>

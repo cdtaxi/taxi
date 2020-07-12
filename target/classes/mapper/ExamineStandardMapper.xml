@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.taxi.mapper.ExamineStandardMapper">
+	<sql id="Base_Column_List">
+		id, ordinal, standard, scoring, stype,ordinal as parent_id
+	</sql>
+
+	<select id="getStandardList" parameterType="pd" resultType="ExamineStandard">
+		select <include refid="Base_Column_List"/> from tb_examineStandard ORDER BY stype
+	</select>
+	<select id="getStandardById" parameterType="String" resultType="ExamineStandard">
+		SELECT <include refid="Base_Column_List"></include>  FROM 	tb_examineStandard
+		WHERE ID =#{id}
+	</select>
+	<insert id="save" parameterType="pd">
+		INSERT INTO tb_examineStandard(ordinal, standard, scoring, stype)
+		VAlues(#{ordinal},#{standard},#{scoring},#{stype} )
+	</insert>
+	<update id="edit" parameterType="pd">
+		UPDATE tb_examineStandard SET ordinal=#{ordinal},standard=#{standard},scoring=#{scoring}, stype=#{stype}
+		WHERE ID =#{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		DELETE FROM tb_examineStandard WHERE ID=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeOrganMapper">
+	<sql id="Base_Column_List">
+		ID, PARENT_ID, TYPE, FIRST_DATE, VALID_STARTDATE, VALID_ENDDATE,
+		 BUBAN_DATE, HUANZHENG_DATE, ADD_DATE
+	</sql>
+	<!-- 查询-->
+	<select id="list" parameterType="hashMap" resultType="EmployeeOrgan">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_employee_organ 
+		<where>
+			<if test="parent_id != null and parent_id != ''"> <!-- 公司检索条件 -->
+				AND PARENT_ID like '%'+ #{parent_id}+'%'
+			</if>
+		</where>		
+	</select>
+	<select id="excelList" parameterType="hashMap" resultType="pd">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_employee_organ 
+		<where>
+			<if test="parent_id != null and parent_id != ''"> <!-- 公司检索条件 -->
+				AND PARENT_ID like '%'+ #{parent_id}+'%'
+			</if>
+		</where>		
+	</select>
+	
+	<!-- 根据主键查询 -->
+	<select id="selectOne" parameterType="hashMap" resultType="EmployeeOrgan">
+		select 
+		<include refid="Base_Column_List" />
+		from 
+			tb_employee_organ
+		where 
+			ID = #{id}
+	</select>
+		
+	<!-- 添加-->
+	<insert id="insert" parameterType="pd">
+		insert into tb_employee_organ (
+			ID,
+			PARENT_ID,
+			TYPE,
+			FIRST_DATE,
+			VALID_STARTDATE,
+			VALID_ENDDATE,
+			BUBAN_DATE,
+			HUANZHENG_DATE,
+			ADD_DATE
+		) values (
+			#{id},
+			#{parent_id},
+			#{type},
+			#{first_date},
+			#{valid_startdate},
+			#{valid_enddate},
+			#{buban_date},
+			#{huanzheng_date},
+			CONVERT(varchar(20), getdate(), 120 )
+		)
+	</insert>
+
+	<!-- 编辑 -->
+	<update id="update" parameterType="pd">
+		update  tb_employee_organ
+			set PARENT_ID		= #{parent_id},
+				TYPE			= #{type},
+				FIRST_DATE 		= #{first_date},
+				VALID_STARTDATE	= #{valid_startdate},
+				VALID_ENDDATE	= #{valid_enddate},
+				BUBAN_DATE		= #{buban_date},
+				HUANZHENG_DATE	= #{huanzheng_date}
+			where 
+				ID = #{id}
+	</update>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from tb_employee_organ 
+		where 
+			ID = #{id}
+	</delete>
+	
+	
+	
+</mapper>

@@ -1,0 +1,93 @@
+[
+	{
+		"pkey": 194,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "1",
+		"value": "比亚迪",
+		"sequence": 1
+	},
+	{
+		"pkey": 195,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "2",
+		"value": "吉利",
+		"sequence": 2
+	},
+	{
+		"pkey": 196,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "3",
+		"value": "羚羊",
+		"sequence": 3
+	},
+	{
+		"pkey": 197,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "4",
+		"value": "荣威",
+		"sequence": 4
+	},
+	{
+		"pkey": 198,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "5",
+		"value": "集装箱车",
+		"sequence": 5
+	},
+	{
+		"pkey": 199,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "6",
+		"value": "桑塔纳",
+		"sequence": 6
+	},
+	{
+		"pkey": 200,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "7",
+		"value": "松花江",
+		"sequence": 7
+	},
+	{
+		"pkey": 201,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "8",
+		"value": "威志",
+		"sequence": 8
+	},
+	{
+		"pkey": 202,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "9",
+		"value": "夏利",
+		"sequence": 9
+	},
+	{
+		"pkey": 203,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "10",
+		"value": "夏利N3",
+		"sequence": 10
+	},
+	{
+		"pkey": 204,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "11",
+		"value": "伊兰特",
+		"sequence": 11
+	},
+	{
+		"pkey": 205,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "12",
+		"value": "志俊",
+		"sequence": 12
+	},
+	{
+		"pkey": 206,
+		"lookupCode": "VEHICLE_CARTYPE",
+		"key": "13",
+		"value": "其他",
+		"sequence": 13
+	} 
+]

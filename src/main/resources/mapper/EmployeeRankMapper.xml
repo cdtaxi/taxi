@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.taxi.mapper.EmployeeRankMapper">
+	<sql id="Base_Column_List">
+		ID, PID, YEAR, RANK, CREATE_TIME
+	</sql>
+	<insert id="insert" parameterType="pd">
+		insert into tb_employee_rank
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="pid != null">
+				PID,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+			<if test="rank != null">
+				RANK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+			<if test="rank != null">
+				#{rank,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	
+	<select id="list" parameterType="pd" resultType="EmployeeRank">
+		SELECT
+			a.NAME, a.SEX, a.BORNDATE,a.CYZG_CARD,
+			a.IDCARD, a.EDUCATED,
+			a.PHONE, a.CARID, a.COMPANY,
+			a.STATUS, b.YEAR,
+			b.RANK, b.ID
+		FROM
+			tb_employee a,
+			tb_employee_rank b
+		where 
+			a.ID = b.PID 
+		
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="company != null and company != ''"> <!-- 检索条件 -->
+				AND a.COMPANY =  #{company}
+			</if>
+	</select>
+	<select id="excelList" parameterType="pd" resultType="pd">
+		SELECT
+			a.NAME, a.SEX, a.BORNDATE,a.CYZG_CARD,
+			a.IDCARD, a.EDUCATED,
+			a.PHONE, a.CARID, a.COMPANY,
+			a.STATUS, b.YEAR,
+			b.RANK, b.ID,b.CREATE_TIME
+		FROM
+			tb_employee a,
+			tb_employee_rank b
+		where 
+			a.ID = b.PID 
+		
+		<if test="name != null and name != ''"> <!-- 检索条件 -->
+				AND a.NAME like '%'+ #{name}+'%'
+			</if>
+			<if test="cyzgCard != null and cyzgCard != ''"> <!-- 检索条件 -->
+				AND a.CYZG_CARD like '%'+ #{cyzgCard}+'%'
+			</if>
+			<if test="company != null and company != ''"> <!-- 检索条件 -->
+				AND a.COMPANY =  #{company}
+			</if>
+	</select>
+	
+	<update id="update" parameterType="pd">
+		update 
+			tb_employee_rank 
+		set 
+			RANK = #{rank,jdbcType=VARCHAR} 
+		where 
+			ID=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectOne" parameterType="String" resultType="EmployeeRank">
+		select
+			*
+		from tb_employee_rank
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from tb_employee_rank 
+		where 
+			ID = #{id}
+	</delete>
+	
+	
+	
+</mapper>
